@@ -1,0 +1,104 @@
+tail -f /var/log/secure
+#crear usuario
+useradd omitar
+#Desactivar usuario root y cambiar el puerto#
+#cambiar lineas en el archivo /etc/ssh/sshd_config
+rootLogin = no
+port 7777
+#establecer conexion remota
+ssh "usuario"@"dirccion ip" -p "puerto"  // por defecto es el 22
+# comandos para mirar los atques que esta recibiendo la maquina -f follow
+tail -f /var/log/secure 
+# installar firewall 
+yum install firewalld -y 
+#installar apche
+yum install httpd -y 
+# Establecer una nueva regla del firewall
+firewall-cmd --permanent --zone=public --add-port="puertoquecolocamos"/tcp
+firewall-cmd --permanent --zone=public --add-port=7777/tcp
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --permanent --zone=public --add-port=443/tcp
+# ver puertos abiertos en el firewall
+Firewall-cmd --list-ports
+#reiniciar servicio del firewall
+systemctl restart firewalld
+#inciar servicio del firewall
+systemctl start firewalld
+#states servicio del firewall
+systemctl status firewalld
+
+
+##añadir certificado de seguridad a la pagina##
+#todos los archivos .conf sirven para poder modificar el apache
+yum install epel-release -y 
+yum install httpd mod_ssl python -y 
+#Instalar cerbot
+yum install certbot-apache y 
+certbot --apache -d agrostore.ml
+
+#vi HOST (Mismo servidor, diferentes paginas)
+nano /etc/httpd/conf.d/vhost.conf
+ -> 
+<VirtualHost *:80>
+	Servername cautinteam.tk
+	RewriteEngine On
+	RewriteCond %{SERVER_NAME} =cautinteam.tk
+	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+
+
+-----
+nano /etc/httpd/conf.d/vhost-ssl.conf
+-> 
+<IfModule mod_ssl.c>
+	<VirtualHost *:443>
+		Servername cautinteam.tk
+		ProxyPreserveHost On
+
+		Alias / /var/www/html/
+		<Directory /var/www/html/>
+			Options Indexes FollowSymLinks MultiViews
+			AllowOverride None
+			Order allow,deny
+			Allow from all
+		</Directory>
+		ProxyPassMatch ^/ !
+		
+		RequestHeader edit Origin ^https://cautinteam.tk/$ http://cautinteam.tk/
+
+	</VirtualHost>
+</IfModule>
+
+systemctl restart httpd
+
+
+
+certbot --apache -d cautinteam.tk
+systemctl restart httpd
+
+################Instalar servidor de Mysql########################
+
+sudo yum update  #actualizar librerias
+wget http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm #descargar el fichero de mysql
+sudo rpm -Uvh mysql57-community-release-el7-9.noarch.rpm                 #abrir repositorio
+sudo yum install mysql-server   #instalar sql server
+sudo systemctl start mysqld     #iniciar servicio de mysql
+sudo systemctl status mysqld    #ver estado
+
+###############Instalar JDK java##############################
+cd /opt/
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz"
+tar xzf jdk-8u201-linux-x64.tar.gz
+cd jdk1.8.0_201/
+alternatives --install /usr/bin/java java /opt/jdk1.8.0_201/bin/java 2
+alternatives --config java ## aqui java ya esta instalado
+alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_201/bin/jar 2
+alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_201/bin/javac 2
+alternatives --set jar /opt/jdk1.8.0_201/bin/jar
+alternatives --set javac /opt/jdk1.8.0_201/bin/javac
+java -version# ver version de java
+#establecer las variables de entorno para java
+export JAVA_HOME=/opt/jdk1.8.0_201
+export JRE_HOME=/opt/jdk1.8.0_201/jre
+export PATH=$PATH:/opt/jdk1.8.0_201/bin:/opt/jdk1.8.0_201/jre/bin
+

@@ -1,0 +1,20 @@
+# Crear las bases de datos
+CREATE DATABASE tuexpertoenpensiones;
+
+# Mostrar la base de datos
+show databases;
+
+# Crear Usuario con contraseña 
+create user 'tuexperto'@'%' identified by 'tuexperto1234##';
+
+# Dar permisos al nuevo usuario indicando la base de datos a la cual se le daran dichos permisoss
+grant all on tuexpertoenpensiones.* to 'tuexperto'@'%';
+
+
+# Sentencia para Insertar datos dentro de una base de datos Mysql
+INSERT INTO Clientes (nombre, apellido , email , creado_en) VALUES ('Omitar', 'Cuadrado', 'omitarcuadrado@gmail.com', '2010-12-12')
+
+# Setencia para Borrar datos dentro de una base de datos Mysql
+DELETE FROM `db_mysql_learning`.`clientes` WHERE (`id` = '1');
+
+ionic cordova build --release android

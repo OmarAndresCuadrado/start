@@ -1,0 +1,75 @@
+soruce: https://www.youtube.com/watch?v=O30qTFIr7Uw
+cosas para cambiar site1,site2
+
+////// Crear multiples dominios con Vhost////
+nohup java -jar algo &
+
+1 --- Instalar apache
+
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+2 --- Crear las carpetas para los dominios que se utilizaran
+
+#ingresar a la ruta /var/www/html 
+cd /var/www/html
+mkdir site1
+mkdir site2
+sudo chown apache:apache -R site1
+sudo chown apache:apache -R site2
+
+#crear index.html dentro del directorio 
+sudo nano site1/index.html
+sudo nano site2/index.html
+
+3 --- Agregar los dominios a la configuracion de apache  (/var/www/html)
+
+#ingresar a la ruta /etc/httpd/
+cd /etc/httpd/
+sudo mkdir sites-available
+sudo mkdir sites-enable
+
+
+#ingresar a la ruta /etc/httpd/conf/
+#configurar el archivo httpd.conf
+nano httpd.conf
+#ir al final
+IncludeOptional sites-enabled/*.conf
+
+
+
+4 --- Configurar los archivos de configuaracion de los dominios ---
+
+#ingresar a la carpeta de site-available
+sudo nano site1.com.conf
+
+
+<VirtualHost *:80>
+
+    DocumentRoot /var/www/html/site1/
+    ServerName 142.93.144.165 
+    ServerAlias 142.93.144.165 
+	ErrorLog /var/www/html/site1/error.log
+	CustomLog /var/www/html/site1/request.log combined
+</VirtualHost>
+
+sudo nano site2.com.conf
+
+<VirtualHost *:80>
+
+    DocumentRoot /var/www/html/site2/
+    ServerName www.tuexpertoenpensiones.ml 
+    ServerAlias tuexpertoenpensiones.ml
+	ErrorLog /var/www/html/site2/error.log
+	CustomLog /var/www/html/site2/request.log combined
+</VirtualHost>
+
+
+sudo ln -s /etc/httpd/site-available/site1.com.conf /etc/httpd/sites-enabled/site1.com.conf
+sudo ln -s /etc/httpd/site-available/site2.com.conf /etc/httpd/sites-enabled/site2.com.conf
+sudo setenforce 0
+
+
+4 --- Reiniciar el servicio
+systemctl restart httpd 

@@ -1,0 +1,30 @@
+
+app.module ///
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+services ///
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+public environment = environment;
+private endpoint = environment.api.login;
+private httpHeaders = new HttpHeaders({ 'Contet-Type': 'application/json' });
+
+enverioments ///
+
+export const environment = {
+  production: false,
+
+  api: {
+    user: 'http://localhost:62734/api/user',
+    login: 'http://localhost:62734/api/user/Login'
+  },
+};
+
+APProuting ///
+const routes: Routes = [
+  {path: '', redirectTo: '/clientes' , pathMatch: 'full'},
+  {path: 'register' , component: RegisterComponent},
+  {path: 'register/:id' , component: RegisterComponent},
+  {path: 'login' , component: LoginComponent},
+  {path: 'clients' , component: ClientsComponent}
+];
