@@ -1,0 +1,18 @@
+ng build --prod  
+ng build --dev 
+//con las banderas --prod es mas optimo y son menores en tamaño
+//bundle sizes are smaller
+//no se utiliza el directorio src porque es para hacer debug
+//coloca todos los estilos en styles.css	
+//Crear el directorio dist
+//Que se puede ver en el .angular-dl.json 
+//"outputPath": "dist/tuexpertoenpensiones", Angular.json -- 13-16
+//Se copia todos los archivos en el servidor donde queremos desplegar nuestra pagina
+
+
+
+DIFERENCIAS ENTRE build bs prod build
+
+dev build
+Ayuda a hacer debug a la aplicacion produciendo source Maps
+

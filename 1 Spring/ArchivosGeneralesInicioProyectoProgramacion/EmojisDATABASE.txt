@@ -1,0 +1,37 @@
+1) Database: Change Database default collation as utf8mb4.
+
+ALTER DATABASE
+    database_name
+    CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;
+	
+
+2) Table: Change table collation as CHARACTER SET utf8mb4 COLLATE utf8mb4_bin. 
+
+ALTER TABLE tweets CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
+
+ALTER TABLE
+    table_name
+    CONVERT TO CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+
+3) size
+
+
+
+execute
+
+show VARIABLES like "%char%”;
+
+find character-set-server if is not utf8mb4.
+
+set it in your my.cnf, like
+
+vim /etc/my.cnf
+
+add one line
+
+character_set_server = utf8mb4
+
+at last restart mysql

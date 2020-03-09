@@ -1,0 +1,50 @@
+DROP DATABASE db_tesis;
+
+# Crear las bases de datos
+CREATE DATABASE db_tesis;
+
+# Mostrar la base de datos
+show databases;
+
+# Crear Usuario con contraseña 
+# create user 'omitar'@'%' identified by 'Awesome123';
+
+# Dar permisos al nuevo usuario indicando la base de datos a la cual se le daran dichos permisoss
+grant all on db_algoritmos.* to 'omitar'@'%';
+
+# CAMBIAR TAMAÑOS DE COLUMNAS
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `account_name` `account_name` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `hashtag` `hashtag` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `language` `language` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `location` `location` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `query` `query` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `sentiment_tweet` `sentiment_tweet` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `tweet_contect` `tweet_contect` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `url_profile_image` `url_profile_image` VARCHAR(999) NULL DEFAULT NULL;
+ALTER TABLE `db_tesis`.`tweets` 
+CHANGE COLUMN `user` `user` VARCHAR(999) NULL DEFAULT NULL;
+
+
+# CAMBIAR TIPO DE LECTURA DE BASE DE DATOS PARA CARACTERES ESPECIALES
+
+ALTER DATABASE
+    db_tesis
+    CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_unicode_ci;
+	
+# CAMBIAR TABLE DE LECTURA DE BASE DE DATOS PARA CARACTERES ESPECIALES
+
+  ALTER TABLE
+    tweets
+    CONVERT TO CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+	
+	

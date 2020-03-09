@@ -1,0 +1,14 @@
+
+//Descargar e instalar los nugets
+Microsft.EntityFrameworkCore
+Microsft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc2    cambiar info por OpenApiInfo
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+
+//Despues de configurar el context , el entity la conexion en el startup hacer esto
+//////////////// project > tols > nugetPckageManager > packageManagerConsole
+Add-Migration  "InitialCreate" //se creara una carpeta llama Migration
+Update-Database //con este comando crearemos nuestra base de datos y las tablas
+

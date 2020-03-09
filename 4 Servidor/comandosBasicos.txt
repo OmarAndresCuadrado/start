@@ -1,0 +1,72 @@
+# Crear las bases de datos
+CREATE DATABASE tuexpertoenpensiones;
+
+# Mostrar la base de datos
+show databases;
+
+# Crear Usuario con contraseña 
+create user 'omitarpagina'@'%' identified by 'omitar12345';
+
+# Dar permisos al nuevo usuario indicando la base de datos a la cual se le daran dichos permisoss
+grant all on omitarpagina.* to 'wordpress'@'%';
+
+
+# Sentencia para Insertar datos dentro de una base de datos Mysql
+INSERT INTO Clientes (nombre, apellido , email , creado_en) VALUES ('Omitar', 'Cuadrado', 'omitarcuadrado@gmail.com', '2010-12-12')
+
+# Setencia para Borrar datos dentro de una base de datos Mysql
+DELETE FROM `db_mysql_learning`.`clientes` WHERE (`id` = '1');
+
+ionic cordova build --release android
+
+
+
+//////////////////////INSTALAR PHP//////////////////////
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum install yum-utils
+sudo subscription-manager repos --enable=rhel-7-server-optional-rpms
+sudo yum-config-manager --enable remi-php72
+sudo yum update
+sudo yum search php72 | more
+sudo yum install php72 php72-php-fpm php72-php-gd php72-php-json php72-php-mbstring php72-php-mysqlnd php72-php-xml php72-php-xmlrpc php72-php-opcache
+sudo yum install httpd
+
+
+////////////////////////////////// CONFIGURACION WORDPRESS /////////////////////////////////////
+#prerquisitos
+tener instalado php, apache y mysql
+#Creamos una base de datos
+CREATE DATABASE carlosquinterowordpress;
+CREATE DATABASE omarcuadradowordpress;
+
+#Creamos un usuario para esa base de datos
+CREATE USER carlosqwordpress@'%' IDENTIFIED BY 'palo495$%3145zao1#$';
+CREATE USER omarcwordpress@'%' IDENTIFIED BY 'palo495$%3145zao1#$';
+
+
+#Damos permisos a ese usuario dentro de esa base de datos
+GRANT ALL PRIVILEGES ON carlosquinterowordpress.* TO carlosqwordpress@'%' IDENTIFIED BY 'palo495$%3145zao1#$';
+GRANT ALL PRIVILEGES ON omarcuadradowordpress.* TO omarcwordpress@'%' IDENTIFIED BY 'palo495$%3145zao1#$';
+
+
+#Opcional
+FLUSH PRIVILEGES;
+
+#Descargar archivos iniciales de wordpress
+wget http://wordpress.org/latest.tar.gz
+tar xzvf latest.tar.gz
+
+#mover los archivos a nuestro repositorio de apache (VHOST)
+sudo rsync -avP ~/wordpress/ /var/www/html/
+mkdir /var/www/html/wp-content/uploads
+sudo chown -R apache:apache /var/www/html/*
+
+#configurar database coneection wordpres
+cd /var/www/html
+cp wp-config-sample.php wp-config.php
+nano wp-config.php
+
+#pagina principal configuracion de la pagina de wordpres
+#URL wp-admin
+

@@ -1,0 +1,25 @@
+/// angular elements instalar
+ng add @angular/elements
+ng version
+
+
+********* como converitir un angular element (angular componenen) a custom elements (web componente) **********
+
+app.modules
+import { NgModule, Injector } from '@angular/core';
+import {createCustomElement} from '@angular/elements';
+
+ entryComponents: [
+    UserPollComponent
+  ]
+
+user-poll.componenet
+shadowDOM
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+
+
+
+top 3
+left 4
+bott 3
+righ 2

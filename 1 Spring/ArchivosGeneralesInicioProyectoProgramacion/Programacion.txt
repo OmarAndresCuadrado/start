@@ -1,0 +1,73 @@
+/////////////////BACKEND////////////////////////////
+configurar db
+	application.properties (junto a permisos de usuario)
+pom.xml (generar su jar)	
+crear entidad
+crear daoI
+crear serviceI
+crear serviceimp
+crear controlador
+implementar paginador (JpaRepository)
+implentar jwt
+manejar excepciones backend (exepciones de consultas (db) || objetos null)
+manejar errores backend anotaciones entity(@email,@size) y controllador()
+manejar excepciones de forms
+
+
+
+/////////////////FRONTEND////////////////////////////
+crear interfaces
+crear pages y componentes
+importar los modulos necesarios (httpModule, RouterModule , formModule...etc)
+configurar el archivo de rutas (for.root())
+manejar excepciones de forms
+utilizar operadores map(permite cambiar los tipos de datos y los datos dentro de un objeto) y pipes
+
+
+
+
+
+///// Mejorar frontend ////
+Tipografia 
+Sombras de colores (colocar los elementos mas importantes con colores para resaltar ejemplo un boton azul contra un boton rojo)
+(fondos claros para los elementos menos importantes, elementos importantes fondo solidos)
+Quitar bordes y mejor utilizar espacios en blanco (no sobrecargar las paginas) (whitespace)
+Tener concistencia -- utilizar un estandar para titulos parrafos botones color etc
+
+
+
+
+
+
+
+
+
+
+////////
+table(nullable=false, unique=true)
+para probar errores probar con postman
+https://angular.io/api/forms/Validators para ver todos los validadores disponibles
+
+pattern validator -- permite utilizar expreciones regulares
+
+Backend:
+@Pattern.List({
+        @Pattern(regexp = "(?=.*[0-9]).+", message = "Password must contain one digit."),
+        @Pattern(regexp = "(?=.*[a-z]).+", message = "Password must contain one lowercase letter."),
+        @Pattern(regexp = "(?=.*[A-Z]).+", message = "Password must contain one upper letter."),
+        @Pattern(regexp = "(?=.*[!@#$%^&*+=?-_()/\"\\.,<>~`;:]).+", message ="Password must contain one special character."),
+        @Pattern(regexp = "(?=\\S+$).+", message = "Password must contain no whitespace.")
+})
+
+Exiten dis tipos de paradigmas de programacion
+
+Programacion Declarativa
+--funcional (logica)
+
+
+
+Programacion Imperativa
+--orientada a objetos (Visual , orientada a eventos , orientada a aspectos)
+
+
+Los lenguajes de programación imperativos generalmente hacen uso de procedimientos, rutinas o funciones impuras para establecer mecanismos de control, que potencialmente generan efectos secundarios y mutan el estado del programa durante su ejecución, a diferencia de los lenguajes de programación declarativos, en donde los mecanismos de control están dados por funciones o expresiones puramente matemáticas que carecen de efectos secundarios.
